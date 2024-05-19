@@ -3,6 +3,7 @@ package handler
 import (
 	"common"
 	"common/tools"
+	"errors"
 	"fmt"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
@@ -29,6 +30,12 @@ func (sh *SignUpHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		httpx.ErrorCtx(r.Context(), w, err)
 		return
 	}
+	result := common.NewResult()
+	//参数校验
+	if req.Captcha == nil {
+		httpx.OkJsonCtx(r.Context(), w, result.Deal(nil, errors.New("人机校验不通过")))
+		return
+	}
 	//2.获取IP
 	req.Ip = tools.GetRemoteClientIp(r)
 
@@ -38,7 +45,6 @@ func (sh *SignUpHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := common.NewResult()
 	result.Success("注册成功")
 	fmt.Println(resp)
 	httpx.OkJsonCtx(r.Context(), w, result)

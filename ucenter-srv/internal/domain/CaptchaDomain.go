@@ -33,7 +33,7 @@ func (d *CaptchaDomain) Verify(
 	token string,
 	scene int,
 	ip string) bool {
-
+	logx.Info("[CaptchaDomain]")
 	//1.发送Post请求
 	resp, err := tools.Post(server, &vaptchaReq{
 		Id:        vid,
@@ -42,6 +42,7 @@ func (d *CaptchaDomain) Verify(
 		Scene:     scene,
 		Ip:        ip,
 	})
+	logx.Info("[CaptchaDomain] resp ", resp)
 	if err != nil {
 		logx.Error(err)
 		return false

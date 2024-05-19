@@ -79,11 +79,13 @@ services:
       KAFKA_RESTART_ATTEMPTS: "10"
       KAFKA_RESTART_DELAY: "5"
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
-  # nginx:
-  #   container_name: nginx
-  #   image: nginx
-  #   ports:
-  #     - "9999:81"
-  #   volumes:
-  #     - ${NGINX_DIR}/conf:/etc/nginx/conf.d
-  #     - ${NGINX_DIR}/log:/var/log/nginx
+#  nginx:
+#     container_name: nginx
+#     image: nginx
+#     ports:
+#       - "80:80"
+#       - "81:81"
+#     volumes:
+#       - ${NGINX_DIR}/conf/nginx.conf:/etc/nginx/nginx.conf
+#       - ${NGINX_DIR}/log:/var/log/nginx
+#     command: nginx -g 'daemon off;' -c /etc/nginx/conf.d/nginx.conf

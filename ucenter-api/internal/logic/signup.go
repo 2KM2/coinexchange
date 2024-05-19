@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 	"golang.org/x/net/context"
 	"grpc-common/ucenter/types/register"
@@ -25,8 +26,15 @@ func NewSignUpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SignUpLogi
 func (l *SignUpLogin) SignUpByPhone(req *types.Request) (resp *types.Response, err error) {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFunc()
-	//regReq := &register.RegReq{}
-	_, err = l.svcCtx.UCRegisterRpc.RegisterByPhone(ctx, &register.RegReq{})
+
+	regReq := &register.RegReq{}
+	//将req复制给RPC中定义的类型
+	err = copier.Copy(regReq, req)
+	if err != nil {
+		return nil, err
+	}
+	//调用RegisterByPhone RPC
+	_, err = l.svcCtx.UCRegisterRpc.RegisterByPhone(ctx, regReq)
 	if err != nil {
 		return nil, err
 	}

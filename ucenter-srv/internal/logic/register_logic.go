@@ -33,6 +33,7 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 
 func (rl *RegisterLogic) RegisterByPhone(in *register.RegReq) (*register.RegRes, error) {
 	//1.人机校验
+	logx.Info("[RegisterByPhone] 人机校验")
 	isVerify := rl.CaptchaDomain.Verify(
 		in.Captcha.Server,
 		rl.svcCtx.Config.Captcha.Vid,
@@ -41,11 +42,11 @@ func (rl *RegisterLogic) RegisterByPhone(in *register.RegReq) (*register.RegRes,
 		2,
 		in.Ip,
 	)
-
+	logx.Info("[RegisterByPhone] result ", isVerify)
 	if !isVerify {
 		return nil, errors.New("人机校验不通过")
 	}
-	logx.Infov("人机校验通过....")
+	logx.Info("[RegisterByPhone] 人机校验通过....")
 	return &register.RegRes{}, nil
 }
 func (rl *RegisterLogic) SendCode(req *register.CodeReq) (*register.NoRes, error) {
