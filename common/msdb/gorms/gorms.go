@@ -17,6 +17,8 @@ func (g *GormConn) Begin() {
 func New(db *gorm.DB) *GormConn {
 	return &GormConn{db: db, tx: db}
 }
+
+// Session returns *gorm.DB
 func (g *GormConn) Session(ctx context.Context) *gorm.DB {
 	return g.db.Session(&gorm.Session{Context: ctx})
 }
