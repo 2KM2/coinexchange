@@ -10,4 +10,9 @@ func RegisterHandlers(r *Routers, serverCtx *svc.ServiceContext) {
 	signUpGroups := r.Group()
 	signUpGroups.Post("/uc/register/phone", signup.SignUp)
 	signUpGroups.Post("/uc/mobile/code", signup.SendCode)
+
+	//登录路由
+	signIn := NewSignInHandler(serverCtx)
+	signInGroups := r.Group()
+	signInGroups.Post("/uc/login", signIn.SignIn)
 }

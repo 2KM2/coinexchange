@@ -19,6 +19,7 @@ type (
 	Register interface {
 		RegisterByPhone(ctx context.Context, in *RegReq, opts ...grpc.CallOption) (*RegRes, error)
 		SendCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*NoRes, error)
+
 	}
 
 	defaultRegister struct {
