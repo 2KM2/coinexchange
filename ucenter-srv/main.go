@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
+	"grpc-common/ucenter/types/login"
 	"grpc-common/ucenter/types/register"
 	"ucenter-srv/internal/config"
 	"ucenter-srv/internal/server"
@@ -26,8 +27,8 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		register.RegisterRegisterServer(grpcServer, server.NewRegisterServer(ctx))
-
+		register.RegisterRegisterServer(grpcServer, server.NewRegisterServer(ctx)) //注册服务RPC-Server
+		login.RegisterLoginServer(grpcServer, server.NewLoginServer(ctx))          //登录服务RPC-Server
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}

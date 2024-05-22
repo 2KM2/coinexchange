@@ -39,7 +39,10 @@ func (m MemberDao) Save(ctx context.Context, mem *model.Member) error {
 
 func (m MemberDao) UpdateLoginCount(ctx context.Context, id int64, step int) error {
 	//TODO implement me
-	panic("implement me")
+	// panic("implement me")
+	session := m.conn.Session(ctx)
+	err := session.Exec("update member set login_count = login_count +? where id =?", step, id).Error
+	return err
 }
 
 func (m MemberDao) FindMemberById(ctx context.Context, memberId int64) (mem *model.Member, err error) {

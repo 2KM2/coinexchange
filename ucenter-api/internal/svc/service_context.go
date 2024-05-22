@@ -11,11 +11,13 @@ type ServiceContext struct {
 	Config        config.Config
 	UCRegisterRpc ucclient.Register
 	Cache         cache.Cache
+	UCLoginRpc    ucclient.Login //登录的Client-RPC
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:        c,
 		UCRegisterRpc: ucclient.NewRegister(zrpc.MustNewClient(c.UCenteredRpc)),
+		UCLoginRpc:    ucclient.NewLogin(zrpc.MustNewClient(c.UCenteredRpc)),
 	}
 }
