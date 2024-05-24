@@ -1,0 +1,29 @@
+Okx:
+  ApiKey: "3713273a-748a-423a-9a83-dd20359ac75e"
+  SecretKey: "4835CC64C8B7498F51C70731205C62EE"
+  Pass: "Zachary20240503."
+  Host: "https://www.okx.com"
+  Proxy: "http://localhost:7890"
+Mongo:
+  Url: "mongodb://localhost:27018"
+  Username: "root"
+  Password: "root123456"
+  DataBase: "mscoin"
+Kafka:
+  Addr: localhost:9092
+  WriteCap: 100
+  ReadCap: 100
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Type: node
+UCenterRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: ucenter.rpc
+Bitcoin:
+  Address: http://127.0.0.1:18332
+
+#3713273a-748a-423a-9a83-dd20359ac75e
+#4835CC64C8B7498F51C70731205C62EE
+#Zachary20240503.
