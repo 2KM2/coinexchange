@@ -1,6 +1,8 @@
 package config
 
 import (
+	"cron-task/internal/database"
+	"cron-task/internal/logic"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/zrpc"
 )
@@ -11,5 +13,4 @@ type Config struct {
 	Kafka      database.KafkaConfig
 	CacheRedis cache.CacheConf
 	UCenterRpc zrpc.RpcClientConf
-	Bitcoin    logic.BitCoinConfig
 }

@@ -1,7 +1,7 @@
 Okx:
   ApiKey: "3713273a-748a-423a-9a83-dd20359ac75e"
   SecretKey: "4835CC64C8B7498F51C70731205C62EE"
-  Pass: "Zachary20240503."
+  Password: "Zachary20240503."
   Host: "https://www.okx.com"
   Proxy: "http://localhost:7890"
 Mongo:
