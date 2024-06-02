@@ -2,10 +2,14 @@ Name: ucentered-api
 Host: 0.0.0.0
 Port: 8888
 UCenteredRpc:
+#  Target: consul://127.0.0.1:8500/ucenter.rpc?wait=14s
   Etcd:
     Hosts:
       - 127.0.0.1:2379
     Key: ucenter.rpc
+#Consul:
+#  Host: 127.0.0.1:8500
+#  Key: ucenter_api.rpc
 JWT:
   AccessSecret: "!@#$mscoin"
   AccessExpire: 604800

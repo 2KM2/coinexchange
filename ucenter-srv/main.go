@@ -24,6 +24,7 @@ func main() {
 	logx.MustSetup(logx.LogConf{Stat: false, Encoding: "plain"})
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	//logx.Info(c.Consul)
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
@@ -33,6 +34,9 @@ func main() {
 			reflection.Register(grpcServer)
 		}
 	})
+	//将 rpc注册到consul
+
+	//_ = consul.RegisterService(c.ListenOn, c.Consul)
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)

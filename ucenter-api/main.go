@@ -5,17 +5,23 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
-
 	"ucenter-api/internal/config"
 	"ucenter-api/internal/handler"
 	"ucenter-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
+	_ "github.com/zeromicro/zero-contrib/zrpc/registry/consul"
 )
 
 var configFile = flag.String("f", "etc/conf.yaml", "the config file")
 
+/*
+新建client
+AgentServiceRegistration 注册服务
+AgentServiceCheck 注册健康检查
+AddShutdownListener 监听关闭
+*/
 func main() {
 	flag.Parse()
 	logx.MustSetup(logx.LogConf{Stat: false, Encoding: "plain"})
@@ -30,6 +36,7 @@ func main() {
 	router := handler.NewRouters(server)
 	handler.RegisterHandlers(router, ctx)
 
+	//_ = consul.RegisterService(fmt.Sprintf("%s:%d", c.Host, c.Port), c.Consul)
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }

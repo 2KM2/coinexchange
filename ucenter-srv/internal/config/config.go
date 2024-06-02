@@ -10,7 +10,8 @@ type Config struct {
 	Mysql      MysqlConfig
 	CacheRedis cache.CacheConf
 	Captcha    CaptchaConf
-	JWT        AuthConfig
+	//Consul     consul.Conf
+	JWT AuthConfig
 }
 type MysqlConfig struct {
 	DataSource string
